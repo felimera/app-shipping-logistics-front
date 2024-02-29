@@ -4,6 +4,9 @@ import { StoreSearchComponent } from './components/store-search/store-search.com
 import { VehicleSearchComponent } from './components/vehicle-search/vehicle-search.component';
 import { PortSearchComponent } from './components/port-search/port-search.component';
 import { ShipSearchComponent } from './components/ship-search/ship-search.component';
+import { MaterialModule } from '../material/material.module';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,6 +23,11 @@ import { ShipSearchComponent } from './components/ship-search/ship-search.compon
     VehicleSearchComponent,
     PortSearchComponent,
     ShipSearchComponent,
+  ],
+  imports:[
+    CommonModule,
+    ReactiveFormsModule,
+    MaterialModule,
   ]
 })
 export class SharedModule { }
