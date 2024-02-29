@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { User } from '../../interfaces/user.interfaces';
+import { User } from '../../interfaces/user.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-page',
@@ -20,21 +22,34 @@ export class RegisterPageComponent {
   });
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private router: Router,
+    private snackbar: MatSnackBar,
   ) { }
 
   get currentUser(): User {
     const user = this.userForm.value as User;
     return user;
   }
+
   public onSumit(): void {
     if (this.userForm.invalid) return;
 
     this.userService
       .saveUser(this.currentUser)
-      .subscribe(user => {
-        if (user)
-          console.log({ user });
+      .subscribe(msg => {
+        if (msg) {
+          this.showSnackbar(`${this.currentUser.fullName} ${msg.message}`);
+          setTimeout(() => {
+            this.router.navigateByUrl('/auth/login');
+          }, 2500);
+        }
       })
+  }
+
+  public showSnackbar(message: string): void {
+    this.snackbar.open(message, 'done', {
+      duration: 2500,
+    });
   }
 }

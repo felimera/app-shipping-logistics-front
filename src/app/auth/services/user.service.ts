@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environments } from '../../../environments/environments';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../interfaces/user.interfaces';
+import { User } from '../interfaces/user.interface';
 import { Observable } from 'rxjs';
+import { Message } from '../interfaces/message.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public saveUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(`${this.baseUrl}/signup`, user);
+  public saveUser(user: User): Observable<Message> {
+    return this.httpClient.post<Message>(`${this.baseUrl}/signup`, user);
   }
 }
