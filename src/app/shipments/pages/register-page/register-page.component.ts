@@ -17,4 +17,6 @@ export class RegisterPageComponent {
       deadline: new FormControl<string>('', [Validators.required]),
     }
   );
+
+  public typeDelivery:string='G';
 }
