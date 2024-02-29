@@ -1,7 +1,7 @@
 <div class="flex flex-column">
   <span class="text-lg mb-4">Login</span>
 
-  <form class="flex flex-column" [formGroup]="userLoginForm">
+  <form class="flex flex-column" [formGroup]="userLoginForm" (submit)="onSumit()">
     <mat-form-field>
       <mat-label>Correo</mat-label>
       <input type="email" matInput placeholder="Correo del usuario" formControlName="email">
@@ -12,7 +12,7 @@
       <input type="password" matInput placeholder="Contraseña" formControlName="password">
     </mat-form-field>
 
-    <button mat-button mat-flat-button color="primary">
+    <button mat-button mat-flat-button color="primary" (click)="onSumit()">
       <mat-icon>save</mat-icon>
       Ingresar
     </button>
