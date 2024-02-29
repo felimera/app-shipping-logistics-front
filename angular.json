@@ -68,10 +68,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "app-shipping-logistics-front:build:production"
+              "buildTarget": "app-shipping-logistics-front:build:production",
+              "proxyConfig": "proxy.conf.json"
             },
             "development": {
-              "buildTarget": "app-shipping-logistics-front:build:development"
+              "buildTarget": "app-shipping-logistics-front:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
