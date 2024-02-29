@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-register-page',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export class RegisterPageComponent {
+
+  public userForm = new FormGroup({
+    id: new FormControl(''),
+    fullName: new FormControl<string>(''),
+    email: new FormControl<string>(''),
+    password: new FormControl<string>(''),
+    phone: new FormControl<string>(''),
+    gender: new FormControl<string>(''),
+  });
 
 }
