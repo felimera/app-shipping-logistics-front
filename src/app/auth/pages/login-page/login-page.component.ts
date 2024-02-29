@@ -38,7 +38,7 @@ export class LoginPageComponent {
           localStorage.setItem('token', token.jwtToken);
           this.showSnackbar(`Bienvenido`);
           setTimeout(() => {
-            this.router.navigateByUrl('/shipments');
+            this.router.navigateByUrl('/ship');
           }, 2500);
         }
       })
