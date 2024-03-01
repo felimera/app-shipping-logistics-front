@@ -5,7 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { SharedModule } from './shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AppInterceptorService } from './shared/services/app-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,12 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
