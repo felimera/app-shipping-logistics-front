@@ -9,8 +9,17 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
   {
+    path: 'ship',
+    loadChildren: () => import('./shipments/shipments.module').then(m => m.ShipmentsModule),
+  },
+  {
     path: '404',
     component: Error404PageComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'ship',
+    pathMatch: 'full'
   },
   {
     path: '**',
