@@ -27,6 +27,17 @@
           </mat-form-field>
 
           <mat-tab-group class="col-12">
+            <mat-tab label="General product consultation.">
+              <app-product-search-name (productSelectedEventEmitter)="productSelectedEventEmitter($event)">
+              </app-product-search-name>
+            </mat-tab>
+            <mat-tab label="Specific product consultation.">
+              <app-product-search-mult (productSelectedEventEmitter)="productSelectedEventEmitter($event)">
+              </app-product-search-mult>
+            </mat-tab>
+          </mat-tab-group>
+
+          <mat-tab-group class="col-12">
             <mat-tab label="Ground shipments">
               <shared-store-search></shared-store-search>
               <shared-vehicle-search></shared-vehicle-search>
