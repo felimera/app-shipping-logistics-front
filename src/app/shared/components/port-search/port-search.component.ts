@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
@@ -12,6 +12,8 @@ import { PortSearchService } from '../../services/port-search.service';
 })
 export class PortSearchComponent {
 
+  @Output()
+  public portSelectedEventEmitter = new EventEmitter<Port>();
   public searchInput = new FormControl('');
   public ports: Port[] = [];
   public selectedPort?: Port;
@@ -35,5 +37,6 @@ export class PortSearchComponent {
     this.searchInput.setValue(port.location);
 
     this.selectedPort = port;
+    this.portSelectedEventEmitter.emit(this.selectedPort);
   }
 }

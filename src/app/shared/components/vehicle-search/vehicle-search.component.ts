@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
@@ -12,6 +12,8 @@ import { VehicleSearchService } from '../../services/vehicle-search.service';
 })
 export class VehicleSearchComponent {
 
+  @Output()
+  public vehicleSelectedEventEmitter = new EventEmitter<Vehicle>();
   public searchInput = new FormControl('');
   public vehicles: Vehicle[] = [];
   public selectedVehicle?: Vehicle;
@@ -35,5 +37,6 @@ export class VehicleSearchComponent {
     this.searchInput.setValue(vehicle.licensePlate);
 
     this.selectedVehicle = vehicle;
+    this.vehicleSelectedEventEmitter.emit(this.selectedVehicle);
   }
 }
