@@ -1,0 +1,52 @@
+<mat-divider class="mb-2"></mat-divider>
+<div class="grid">
+  <div class="m-2 col-12">
+    <mat-card class="my-3">
+      <mat-card-content>
+        <form class="grid" [formGroup]="productForm" (ngSubmit)="onSumit()">
+
+          <mat-form-field class="col-12">
+            <mat-label>Product name</mat-label>
+            <input matInput type="text" formControlName="name" />
+          </mat-form-field>
+          <mat-form-field class="col-12">
+            <mat-label>Product price</mat-label>
+            <input matInput type="number" formControlName="price" />
+          </mat-form-field>
+          <mat-form-field class="col-12">
+            <mat-label>Product start amount</mat-label>
+            <input matInput type="number" formControlName="startAmount" />
+          </mat-form-field>
+          <mat-form-field class="col-12">
+            <mat-label>Product final amount</mat-label>
+            <input matInput type="number" formControlName="finalAmount" />
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate placeholder="Start date" formControlName="startDate">
+              <input matEndDate placeholder="End date" formControlName="finalDate">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+
+          <app-product-type-search-name class="col-12"
+            (productTypeSelectedEventEmitter)="productTypeSelectedEventEmitter($event)">
+          </app-product-type-search-name>
+
+          <button mat-raised-button color="primary" (click)="onSumit()">Consultar</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="products.length>0">
+      <mat-card-content>
+        <app-product-result-list [products]="products" (productEventEmitter)="productEventEmitter($event)">
+        </app-product-result-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
