@@ -1,17 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../../../product/interfaces/product.interface';
 import { Store } from '../../../store/interfaces/store.interface';
 import { Vehicle } from '../../../vehicle/interfaces/vehicle.interface';
 import { Port } from '../../../port/interfaces/port.interface';
 import { Shipments } from '../../interfaces/shipment.interface';
+import { Customer } from '../../../auth/interfaces/customer.interface';
+import { DeliveryService } from '../../services/delivery.service';
+import { Delivery } from '../../interfaces/delivery.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
   styles: ``
 })
-export class RegisterPageComponent {
+export class RegisterPageComponent implements OnInit {
+
 
   public deliveryForm = new FormGroup(
     {
@@ -30,6 +35,22 @@ export class RegisterPageComponent {
     });
 
   public typeDelivery: string = 'G';
+
+  constructor(
+    private deliveryService: DeliveryService,
+    private snackbar: MatSnackBar,
+  ) { }
+
+  ngOnInit(): void {
+    this.getCustomer();
+  }
+
+  private getCustomer(): void {
+    if (localStorage.getItem('customer')) {
+      const customer: Customer = JSON.parse(localStorage.getItem('customer')!);
+      this.deliveryForm.get('idCustomer')?.setValue(customer.id);
+    }
+  }
 
   public productSelectedEventEmitter(event: Product) {
     this.deliveryForm.get('idProduct')?.setValue(event.id);
@@ -55,7 +76,26 @@ export class RegisterPageComponent {
       this.deliveryForm.get('idShip')?.setValue(event.id);
   }
 
+  private getCurrentDelivery(): Delivery {
+    const delivery = this.deliveryForm.value as Delivery;
+    return delivery;
+  }
+
   public onSumit(): void {
-    console.log('this.deliveryForm.value : ', this.deliveryForm.value);
+
+    if (this.deliveryForm.invalid) return;
+
+    this.deliveryService
+      .postDelivery(this.getCurrentDelivery())
+      .subscribe(delivery => {
+        if (delivery)
+          this.showSnackbar('Successful registration');
+      });
+  }
+
+  public showSnackbar(message: string): void {
+    this.snackbar.open(message, 'done', {
+      duration: 2500,
+    });
   }
 }
