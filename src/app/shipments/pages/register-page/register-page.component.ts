@@ -88,8 +88,12 @@ export class RegisterPageComponent implements OnInit {
     this.deliveryService
       .postDelivery(this.getCurrentDelivery())
       .subscribe(delivery => {
-        if (delivery)
+        if (delivery) {
           this.showSnackbar('Successful registration');
+          setTimeout(() => {
+            this.deliveryForm.reset();
+          }, 2500);
+        }
       });
   }
 
