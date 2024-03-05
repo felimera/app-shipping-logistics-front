@@ -1,0 +1,11 @@
+<div class="flex flex-column p-2">
+  <h3>Select an option:</h3>
+  <mat-form-field>
+    <mat-label>Discounts registered in the system.</mat-label>
+    <mat-select [(value)]="selectedDiscount" (selectionChange)="onSelectedDiscount()">
+      @for (discount of discounts; track discount) {
+      <mat-option [value]="discount">{{discount}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
