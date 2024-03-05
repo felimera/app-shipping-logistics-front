@@ -98,4 +98,15 @@ export class RegisterPageComponent implements OnInit {
       duration: 2500,
     });
   }
+
+  public selectedIndexChange(event: number): void {
+    if (event === 0) {
+      this.deliveryForm.get('idPort')?.setValue(0);
+      this.deliveryForm.get('idShip')?.setValue(0);
+    }
+    if (event === 1) {
+      this.deliveryForm.get('idStore')?.setValue(0);
+      this.deliveryForm.get('idVehicle')?.setValue(0);
+    }
+  }
 }

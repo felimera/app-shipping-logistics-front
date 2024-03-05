@@ -37,7 +37,7 @@
             </mat-tab>
           </mat-tab-group>
 
-          <mat-tab-group class="col-12">
+          <mat-tab-group class="col-12" (selectedIndexChange)="selectedIndexChange($event)">
             <mat-tab label="Ground shipments">
               <shared-store-search
                 (storeSelectedEventEmitter)="storeSelectedEventEmitter($event)"></shared-store-search>
