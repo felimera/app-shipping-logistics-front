@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
@@ -12,6 +12,8 @@ import { StoreSeachService } from '../../services/store-search.service';
 })
 export class StoreSearchComponent {
 
+  @Output()
+  public storeSelectedEventEmitter = new EventEmitter<Store>();
   public searchInput = new FormControl('');
   public stores: Store[] = [];
   public selectedStore?: Store;
@@ -35,5 +37,6 @@ export class StoreSearchComponent {
     this.searchInput.setValue(store.address);
 
     this.selectedStore = store;
+    this.storeSelectedEventEmitter.emit(this.selectedStore);
   }
 }

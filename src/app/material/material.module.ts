@@ -16,9 +16,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 @NgModule({
+  providers:[
+    provideNativeDateAdapter()
+  ],
   exports: [
     MatAutocompleteModule,
     MatButtonModule,
@@ -36,6 +40,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSnackBarModule,
     MatTabsModule,
     MatToolbarModule,
+    MatDatepickerModule,
   ]
 })
 export class MaterialModule { }

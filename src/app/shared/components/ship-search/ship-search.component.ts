@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
@@ -12,6 +12,8 @@ import { ShipSearchService } from '../../services/ship-search.service';
 })
 export class ShipSearchComponent {
 
+  @Output()
+  public shipmentSelectEventEmitter = new EventEmitter<Shipments>();
   public searchInput = new FormControl('');
   public shipments: Shipments[] = [];
   public selectedShip?: Shipments;
@@ -35,5 +37,6 @@ export class ShipSearchComponent {
     this.searchInput.setValue(shipment.fleetNumber);
 
     this.selectedShip = shipment;
+    this.shipmentSelectEventEmitter.emit(this.selectedShip);
   }
 }
