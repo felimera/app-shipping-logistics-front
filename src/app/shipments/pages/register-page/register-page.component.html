@@ -37,17 +37,23 @@
             </mat-tab>
           </mat-tab-group>
 
-          <mat-tab-group class="col-12">
+          <mat-tab-group class="col-12" (selectedIndexChange)="selectedIndexChange($event)">
             <mat-tab label="Ground shipments">
-              <shared-store-search></shared-store-search>
-              <shared-vehicle-search></shared-vehicle-search>
+              <shared-store-search
+                (storeSelectedEventEmitter)="storeSelectedEventEmitter($event)"></shared-store-search>
+              <shared-vehicle-search
+                (vehicleSelectedEventEmitter)="vehicleSelectedEventEmitter($event)"></shared-vehicle-search>
             </mat-tab>
             <mat-tab label="Maritime shipments">
-              <shared-port-search></shared-port-search>
-              <shared-ship-search></shared-ship-search>
+              <shared-port-search (portSelectedEventEmitter)="portSelectedEventEmitter($event)"></shared-port-search>
+              <shared-ship-search
+                (shipmentSelectEventEmitter)="shipmentSelectEventEmitter($event)"></shared-ship-search>
             </mat-tab>
           </mat-tab-group>
 
+          <button class="col-3 mx-2" mat-raised-button color="primary" (click)="onSumit()">
+            Guardar
+          </button>
         </form>
       </mat-card-content>
     </mat-card>

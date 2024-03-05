@@ -1,0 +1,36 @@
+<div class="flex flex-column p-2">
+  <h2>Results table.</h2>
+  <mat-form-field>
+    <table mat-table class="col-12 mat-elevation-z8">
+      <thead>
+        <th>No.</th>
+        <th>Guide Number</th>
+        <th>Price</th>
+        <th>Amount</th>
+        <th>Discount</th>
+        <th>Deadline</th>
+        <th>Customer</th>
+        <th>Product</th>
+        <th>Store</th>
+        <th>Vehicle</th>
+        <th>Port</th>
+        <th>Ship</th>
+        <th></th>
+      </thead>
+      <tbody *ngFor="let delivery of deliveries;let i=index;">
+        <td>{{i+1}}</td>
+        <td>{{delivery.guideNumber}}</td>
+        <td>{{delivery.price}}</td>
+        <td>{{delivery.amount}}</td>
+        <td>{{delivery.discount}}</td>
+        <td>{{delivery.deadline}}</td>
+        <td>{{delivery.idCustomer}}</td>
+        <td>{{delivery.idProduct}}</td>
+        <td>{{delivery.idStore}}</td>
+        <td>{{delivery.idVehicle}}</td>
+        <td>{{delivery.idPort}}</td>
+        <td>{{delivery.idShip}}</td>
+      </tbody>
+    </table>
+  </mat-form-field>
+</div>

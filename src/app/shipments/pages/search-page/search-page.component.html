@@ -1,1 +1,61 @@
-<p>search-page works!</p>
+<mat-divider class="mb-2"></mat-divider>
+<div class="grid">
+  <div class="m-2 col-12">
+    <mat-card class="my-3">
+      <mat-card-content>
+        <form class="grid" [formGroup]="deliverySearchForm">
+
+          <mat-form-field class="col-12">
+            <mat-label>Guide number</mat-label>
+            <input matInput type="text" formControlName="guideNumber" />
+          </mat-form-field>
+
+          <app-product-search-name class="col-6"
+            (productSelectedEventEmitter)="productSelectedEventEmitter($event)"></app-product-search-name>
+
+          <app-shipment-price-search class="col-6" (priceSelectedEventEmitter)="priceSelectedEventEmitter($event)">
+          </app-shipment-price-search>
+
+          <app-shipment-amount-search class="col-6" (amountSelectedEventEmitter)="amountSelectedEventEmitter($event)">
+          </app-shipment-amount-search>
+
+          <app-shipment-discount-search class="col-6"
+            (discountSelectedEventEmitter)="discountSelectedEventEmitter($event)">
+          </app-shipment-discount-search>
+
+          <shared-port-search class="col-6"
+            (portSelectedEventEmitter)="portSelectedEventEmitter($event)"></shared-port-search>
+
+          <shared-ship-search class="col-6"
+            (shipmentSelectEventEmitter)="shipmentSelectEventEmitter($event)"></shared-ship-search>
+
+          <shared-store-search class="col-6"
+            (storeSelectedEventEmitter)="storeSelectedEventEmitter($event)"></shared-store-search>
+
+          <shared-vehicle-search class="col-6"
+            (vehicleSelectedEventEmitter)="vehicleSelectedEventEmitter($event)"></shared-vehicle-search>
+
+          <mat-form-field class="col-12">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate placeholder="Start date" formControlName="initialDeadline">
+              <input matEndDate placeholder="End date" formControlName="finalDeadline">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" (click)="onSumit()">Consultar</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="deliveries.length>0">
+      <mat-card-content>
+        <app-shipment-list class="col-12" [deliveries]="deliveries">
+        </app-shipment-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
